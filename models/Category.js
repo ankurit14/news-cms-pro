@@ -23,6 +23,6 @@ const categorySchema = new mongoose.Schema({
 
  categorySchema.pre('save', function(next){
     this.slug = slugify(this.name, {lower: true});
- })
+ });
 
-module.exports = mongoose('Category',categorySchema); 
+module.exports = mongoose.model('Category',categorySchema); 

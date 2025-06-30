@@ -29,9 +29,20 @@ app.set('view engine', 'ejs');
 mongoose.connect(process.env.MONGODB_URI)
 
 // Routes
-app.get('/', (req, res) => {
-    res.send("News Portal");
-});
+// app.get('/', (req, res) => {
+//     res.send("News Portal");
+// });
+
+app.use('/',require('./routes/frontend'));
+
+app.use('/admin', (req,res,next)=>{
+    res.locals.layout = 'admin/layout';
+    next();
+})
+
+app.use('/admin', require('./routes/admin'));
+
+
 
 // Port
 const port = process.env.PORT || 3000;
