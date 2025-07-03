@@ -11,6 +11,7 @@ router.get('/', userController.loginPage);
 router.post('/index', userController.adminLogin);
 router.get('/logout', userController.logout);
 router.get('/dashboard', userController.dashboard);
+router.get('/settings', userController.settings);
 
 //User CRUD Routes
 //Display all users
