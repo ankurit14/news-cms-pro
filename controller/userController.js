@@ -6,6 +6,9 @@ const loginPage = async(req,res) => {
 }
 const adminLogin = async(req,res) => {}
 const logout = async(req,res) => {}
+const dashboard = async(req,res) => {
+    res.render('admin/dashboard')
+}
 const allUser = async(req,res) => {
     res.render('admin/users')
 }
@@ -31,6 +34,7 @@ module.exports = {
     addUser,
     updateUserPage,
     updateUser,
-    deleteUser
+    deleteUser,
+    dashboard
 }
 

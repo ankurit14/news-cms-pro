@@ -33,8 +33,8 @@ mongoose.connect(process.env.MONGODB_URI)
 //     res.send("News Portal");
 // });
 
+// Routes
 app.use('/',require('./routes/frontend'));
-
 app.use('/admin', (req,res,next)=>{
     res.locals.layout = 'admin/layout';
     next();
