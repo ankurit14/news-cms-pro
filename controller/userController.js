@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const userModel = require('../models/User')
 
 
 const loginPage = async(req,res) => {
@@ -19,7 +20,8 @@ const addUserPage = async(req,res) => {
     res.render('admin/users/create')
 }
 const addUser = async(req,res) => {
-     res.render('admin/users/create')
+     await userModel.create(req.body)
+    res.redirect('/admin/users');
 }
 const updateUserPage = async(req,res) => {
     res.render('admin/users/update')
