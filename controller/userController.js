@@ -14,7 +14,8 @@ const settings = async(req,res) => {
     res.render('admin/settings')
 }
 const allUser = async(req,res) => {
-    res.render('admin/users')
+    const users = await(userModel.find())
+    res.render('admin/users', { users })
 }
 const addUserPage = async(req,res) => {
     res.render('admin/users/create')
