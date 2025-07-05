@@ -61,7 +61,19 @@ const updateUser = async(req,res) => {
         res.status(404).status('user not found ')
     }
 }
-const deleteUser = async(req,res) => {}
+const deleteUser = async(req,res) => {
+    const id = req.params.id
+    try{
+        const user = await userModel.findByIdAndDelete(id)
+        if(!user){
+            return res.status(404).send('User not found')
+        }
+       res.json({success:true})
+    } catch(error) {
+        console.error(error)
+       res.status(500).send('Internal Server Error');
+    }
+}
 
 
 module.exports = {

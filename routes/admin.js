@@ -26,7 +26,7 @@ router.get('/update-user/:id', userController.updateUserPage);
 //Save Update user page
 router.post('/update-user/:id', userController.updateUser);
 //Delete user page
-router.get('/delete-user/:id', userController.deleteUser);
+router.delete('/delete-user/:id', userController.deleteUser);
  
 //Category CRUD routes
 //Display all categories
@@ -40,7 +40,7 @@ router.get('/update-category/:id', categoryController.updateCategoryPage);
 //Save Update category page
 router.post('/update-category/:id', categoryController.updateCategory);
 //Delete category page
-router.get('/update-category/:id', categoryController.deleteCategory);
+router.delete('/delete-category/:id', categoryController.deleteCategory);
 
 
 //Article CRUD route
@@ -55,7 +55,7 @@ router.get('/update-article/:id', articleController.updateArticlePage);
 //Save Update article page
 router.post('/update-article/:id', articleController.updateArticle);
 //Delete article page
-router.get('/update-article/:id', articleController.deleteArticle);
+router.delete('/delete-article/:id', articleController.deleteArticle);
 
 
 //Display all comments
