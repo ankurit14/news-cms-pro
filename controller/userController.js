@@ -1,3 +1,7 @@
+const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
+const dotenv = require('dotenv')
+
 const mongoose = require('mongoose')
 const userModel = require('../models/User')
 
@@ -5,8 +9,33 @@ const userModel = require('../models/User')
 const loginPage = async(req,res) => {
     res.render('admin/login',{ layout: false})
 }
-const adminLogin = async(req,res) => {}
-const logout = async(req,res) => {}
+const adminLogin = async(req,res) => {
+const{ username, password } = req.body;
+try{
+    const user = await userModel.findOne({ username})
+    if(!user){
+        return res.status(401).send('Invalid username and password')
+    }
+
+    const isMatch = await bcrypt.compare(password,user.password);
+    if(!isMatch){
+        return res.status(401).send('Invalid username and password')
+    }
+
+    const jwtData= { id: user._id, fullName: user.fullName, role: user.role}
+    const token = jwt.sign(jwtData, process.env.JWT_SECRET, { expiresIn: '1h' } );
+    res.cookie('token', token, { httpOnly: true, maxAge: 60 * 60 * 1000});
+    res.render('admin/dashboard')
+
+} catch (error){
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+}
+}
+const logout = async(req,res) => {
+    res.clearCookie('token')
+    res.redirect('/admin/')
+}
 const dashboard = async(req,res) => {
     res.render('admin/dashboard')
 }
