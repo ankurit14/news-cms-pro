@@ -6,42 +6,43 @@ const categoryController = require('../controller/categoryController');
 const articleController = require('../controller/articleController');
 const commentController = require('../controller/commentController');
 const isLoggedIn = require('../middleware/isLoggedin');
+const isAdmin = require('../middleware/isAdmin');
 
 //Login Routes
 router.get('/', userController.loginPage);
 router.post('/index', userController.adminLogin);
 router.get('/logout', userController.logout);
 router.get('/dashboard', isLoggedIn, userController.dashboard);
-router.get('/settings', isLoggedIn, userController.settings);
+router.get('/settings', isLoggedIn, isAdmin, userController.settings);
 
 //User CRUD Routes
 //Display all users
-router.get('/users', isLoggedIn, userController.allUser);
+router.get('/users', isLoggedIn, isAdmin, userController.allUser);
 //Open Add user page
-router.get('/add-user', isLoggedIn, userController.addUserPage);
+router.get('/add-user', isLoggedIn, isAdmin, userController.addUserPage);
 //Save Add user page
-router.post('/add-user', isLoggedIn, userController.addUser);
+router.post('/add-user', isLoggedIn, isAdmin, userController.addUser);
 
 //Open update user page
-router.get('/update-user/:id', isLoggedIn, userController.updateUserPage);
+router.get('/update-user/:id', isLoggedIn, isAdmin, userController.updateUserPage);
 //Save Update user page
-router.post('/update-user/:id', isLoggedIn, userController.updateUser);
+router.post('/update-user/:id', isLoggedIn, isAdmin, userController.updateUser);
 //Delete user page
-router.delete('/delete-user/:id', isLoggedIn, userController.deleteUser);
+router.delete('/delete-user/:id', isLoggedIn, isAdmin, userController.deleteUser);
  
 //Category CRUD routes
 //Display all categories
-router.get('/category', isLoggedIn, categoryController.allCategory);
+router.get('/category', isLoggedIn, isAdmin, categoryController.allCategory);
 //Open Add category page
-router.get('/add-category', isLoggedIn, categoryController.addCategoryPage);
+router.get('/add-category', isLoggedIn, isAdmin, categoryController.addCategoryPage);
 //Save Add category page
-router.post('/add-category', isLoggedIn, categoryController.addCategory);
+router.post('/add-category', isLoggedIn, isAdmin, categoryController.addCategory);
 //Open update category page
-router.get('/update-category/:id', isLoggedIn, categoryController.updateCategoryPage);
+router.get('/update-category/:id', isLoggedIn, isAdmin, categoryController.updateCategoryPage);
 //Save Update category page
-router.post('/update-category/:id', isLoggedIn, categoryController.updateCategory);
+router.post('/update-category/:id', isLoggedIn, isAdmin, categoryController.updateCategory);
 //Delete category page
-router.delete('/delete-category/:id', isLoggedIn, categoryController.deleteCategory);
+router.delete('/delete-category/:id', isLoggedIn, isAdmin, categoryController.deleteCategory);
 
 
 //Article CRUD route
