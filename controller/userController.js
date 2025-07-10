@@ -21,7 +21,6 @@ try{
     if(!isMatch){
         return res.status(401).send('Invalid username and password')
     }
-
     const jwtData= { id: user._id, fullName: user.fullname, role: user.role}
     const token = jwt.sign(jwtData, process.env.JWT_SECRET, { expiresIn: '1h' } );
     res.cookie('token', token, { httpOnly: true, maxAge: 60 * 60 * 1000});
@@ -37,7 +36,7 @@ const logout = async(req,res) => {
     res.redirect('/admin/')
 }
 const dashboard = async(req,res) => {
-    res.render('admin/dashboard',{ role: req.role })
+    res.render('admin/dashboard')
 }
 const settings = async(req,res) => {
     res.render('admin/settings')
@@ -54,7 +53,7 @@ const addUserPage = async(req,res) => {
 }
 const addUser = async(req,res) => {
      await userModel.create(req.body)
-    res.redirect('/admin/users');
+    res.redirect('admin/users');
 }
 const updateUserPage = async(req,res) => {
     const id = req.params.id
@@ -85,7 +84,7 @@ const updateUser = async(req,res) => {
 
    user.role =role || user.role
    await user.save()
-   res.redirect('/admin/users')
+   res.redirect('admin/users')
     } catch(error) {
         res.status(404).status('user not found ')
     }
